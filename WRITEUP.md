@@ -2,7 +2,7 @@
 Analyzing a potential drive-by download incident consistent with the Blackhole Exploit Kit.
 
 ## Summary
-This report begins with analyzing a PCAP capture of a drive-by download incident procured from Malware-Traffic-Analysis inspired by the methodology used in the NSF-funded SecKnitKit Cybersecurity Education initiative, provided to me by Dr. K.
+This report begins with analyzing a PCAP capture of a drive-by download incident procured from Malware-Traffic-Analysis inspired by the methodology used in the NSF-funded SecKnitKit Cybersecurity Education initiative, provided to me by Dr. Kanampiu of the WSSU Computer Science Department.
 
 The user traveled down the suspicious chain from the legitimate website (psicologia-online.com), passing through a third party domain (seris.biz), and being redirected (kanon-finale.com) before installing a malicious Java file (Zova44.class). After I determined it could potentially be malicious and should be handled with caution, I used VirusTotal to analyze it further. I then researched the associated factors, and found that this is consistent with the Blackhole Exploit Kit. 
 
