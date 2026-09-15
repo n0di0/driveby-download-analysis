@@ -23,7 +23,7 @@ At 0.179 seconds, I see when the initial page was loaded. It was clear they wish
 
 At 1.288 seconds, I see a request to deliver a banner of some sort, which does not seem too suspicious. This is typcical traffic, and comes from the same host as the website with the same request URI.
 
-However, at 1.878 seconds, I see a request to get information from a completely different URI than the typical request, from http://seris.bin. The HTTP field of this certain packet is interesting:
+However, at 1.878 seconds, I see a request to get information from a completely different URI than the typical request, from http://seris.biz. The HTTP field of this certain packet is interesting:
 
 - Request URI: /20a958bc.js?cp=www.psicologia
 - Referer: http://www.psicologia-online.com\r\n
@@ -41,7 +41,7 @@ After looking through the packets, I saw in packet 92 a packet with (application
 
 In analyzing this HTTP stream, it is clear that the content-type is a Java archive. The User-Agent states Mozilla, but it also states Java/1.6.0_25. The response acknowledges the Java archive file, and lets out a string of text. Upon doing research, "PK" is the beginning of a ZIP file or a compressed Java file package (Kessler). When you continue to study the text, you can see "Zova44.class," which strongly leads me to believe that this is a Java file.
 
-Through observing this PCAP file and looking into the user's traffic, I was able to observe many redirects, different URIs than the typical requests, redirections from websites kanon-finjale as well as seris.bin, and obfuscated JavaScript, and the almost instant download of a Java file, it is clear to me that this is not ordinary activity from the user and should be investigated further. I will use a tool, VirusTotal, to analyze it further. While I was unable to find a payload, the activity was strange enough to analyze this. 
+Through observing this PCAP file and looking into the user's traffic, I was able to observe many redirects, different URIs than the typical requests, redirections from websites kanon-finjale as well as seris.biz, and obfuscated JavaScript, and the almost instant download of a Java file, it is clear to me that this is not ordinary activity from the user and should be investigated further. I will use a tool, VirusTotal, to analyze it further. While I was unable to find a payload, the activity was strange enough to analyze this. 
 
 I utilized VirusTotal to analyze the packet further. I uploaded the PCAP file to the multi-engine antivirus solution submission. As I suspected, because it doesn't have an executable file within the Wireshark files, it would not seem to be easily detected as malicious by 55 of the security vendors. The most popular threat label would be a generic trojan utilizing Java. 7 of the vendors, including Google and Nano-Antivirus, detected threat labels of 'trojan,' using labels like 'Java' which is what my analysis also concluded.
 
