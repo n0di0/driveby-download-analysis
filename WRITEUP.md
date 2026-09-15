@@ -1,14 +1,20 @@
 ## Network Traffic Analysis of a Drive-By Download
 Analyzing a potential drive-by download incident consistent with the Blackhole Exploit Kit.
 
+***
+
 ### Summary
-This report begins with analyzing a PCAP capture of a drive-by download incident procured from Malware-Traffic-Analysis inspired by the methodology used in the NSF-funded SecKnitKit Cybersecurity Education initiative, provided to me by Dr. K. I utilized Wireshark to analyze the redirect chain from the legitimate website (psicologia-online.com), passing through a third party domain (seris.biz), and being redirected (kanon-finale.com) before installing a malicious Java file (Zova44.class). After I determined it was reasonably suspicious, I used VirusTotal to analyze it further. I then researched the associated factors, and foudn that this is consistent with the Blackhole Exploit Kit. 
+This report begins with analyzing a PCAP capture of a drive-by download incident procured from Malware-Traffic-Analysis inspired by the methodology used in the NSF-funded SecKnitKit Cybersecurity Education initiative, provided to me by Dr. K.
+
+The user traveled down the suspicious chain from the legitimate website (psicologia-online.com), passing through a third party domain (seris.biz), and being redirected (kanon-finale.com) before installing a malicious Java file (Zova44.class). After I determined it could potentially be malicious and should be handled with caution, I used VirusTotal to analyze it further. I then researched the associated factors, and found that this is consistent with the Blackhole Exploit Kit. 
 
 ### Environment
 I used Oracle VirtualBox for my virtualization, Kali Linux for the operating system of my VM, Wireshark for my packet analysis, and VirusTotal for malware verification.
 
 ### Background
 A drive-by download occurs when a file, such as an executable, is downloaded onto a user's machine without their authorization. Many online downloads ask for the user to provide consent via popup, and once it is affirmed, the download begins. In a drive-by scenario, however, it is downloaded and installed in the background. The file may be malware, spyware, a computer virus, or even crimeware. Many reputable security organizations have put together databases such as VirusTotal that can be used to easily detect whether files are malicious or not.
+
+***
 
 ### Process
 The timeline would be that a user would look up the website using DNS, would visit the website, would be redirected to a place where they would be connected to downloading it, then we would see the payload, and then view after the infection. 
@@ -23,9 +29,9 @@ At 1.288 seconds, I see a request to deliver a banner of some sort, which does n
 
 However, at 1.878 seconds, I see a request to get information from a completely different URI than the typical request, from http://seris.bin. The HTTP field of this certain packet is interesting:
 
-Request URI: /20a958bc.js?cp=www.psicologia
-Referer: http://www.psicologia-online.com\r\n
-Host: seris.biz\r\n
+- Request URI: /20a958bc.js?cp=www.psicologia
+- Referer: http://www.psicologia-online.com\r\n
+- Host: seris.biz\r\n
 
 Because this is such a strange change initiated roughly 0.6 seconds after the previous loading of other elements of the page, this leads me to believe it is suspicious. I will now look into the corresponding response by following the HTTP Stream.
 
@@ -45,11 +51,13 @@ I utilized VirusTotal to analyze the packet further. I uploaded the PCAP file to
 
 Looking further into the details that VirusTotal provided me about the PCAP file, I see that the kanon-finale.com requests were flagged as interesting. There were many Snort Alerts and Suricata Alerts that I did not catch, as attempted information leaks, attempted user privlege gains, web application attack, and a network trojan being detected. While I was able to determine that this file was malicious and the stream throughout the PCAP file was strange, I am glad I had access to this tool to analyze the packet further based on databases of past similar threats.
 
+***
+
 ### Further Research + Conclusion
 After further research, this seems like the pattern that may be used in a Blackhole Exploit page, with information stored as HTML, using Javascript to decode the payload, perhaps being a malicious Java applet. This is appropriate with the date of this file as well as the information found in the VirusTotal analysis of the packet, being a popular kind of crimeware around 2012 (Sophos). Certain Blackhole Exploits would obtain IPs, countries, browsers, and exploited targets like Java and compromised and legitimate webpages. This is something of a past artefact, but it is important to be familiar with how to identify the beginning of threats, and how to utilize resources and industry research to get a full picture of the security and insecurity landscape.
 
 ### Sources
-https://www.malware-traffic-analysis.net/training-exercises.html
-https://www.garykessler.net/library/file_sigs_GCK_latest.html
-https://web.archive.org/web/20120906071340/http://sophosnews.files.wordpress.com/2012/03/blackhole_paper_mar2012.pdf
-https://www.virustotal.com/
+- https://www.malware-traffic-analysis.net/training-exercises.html
+- https://www.garykessler.net/library/file_sigs_GCK_latest.html
+- https://web.archive.org/web/20120906071340/http://sophosnews.files.wordpress.com/2012/03/blackhole_paper_mar2012.pdf
+- https://www.virustotal.com/
