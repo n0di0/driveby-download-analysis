@@ -2,7 +2,7 @@
 _Nadia Rapheal, NSF SecKnitKit Exercise_
 
 ## Process
-In this report, I analyzed a PCAP of a simulated drive-by download incident. I utilized Wireshark to analyze the redirect chain from the legitimate website, passing through a third party domain, and being redirected before installing a malicious Java file. After I determined it was reasonably suspicious, I used VirusTotal to analyze it further. I then researched the associated factors, and foudn that this is consistent with the Blackhole Exploit Kit.
+In this report, I analyzed a PCAP of a simulated drive-by download incident. I utilized Wireshark to analyze the redirect chain from the legitimate website, passing through a third party domain, and being redirected before installing a malicious Java file. After I determined it was reasonably suspicious, I used VirusTotal to analyze it further. I then researched the associated factors, and found that this is consistent with the Blackhole Exploit Kit.
 
 
 ## Findings
